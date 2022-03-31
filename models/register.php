@@ -1,24 +1,34 @@
 <?php
    require_once __DIR__ . "/database/database.php";
 
-   if(isset($_POST['submit'])){
-      $name = mysqli_real_escape_string($conn, $_POST['name']);
-      $email = mysqli_real_escape_string($conn, $_POST['email']);
-      $pass = md5($_POST['password']);
-      $cpass = md5($_POST['cpassword']);
-      $user_type = $_POST['user_type'];
-      $select = " SELECT * FROM user_form WHERE email = '$email' && password = '$pass' ";
-      $result = mysqli_query($conn, $select);
+   function validateRegister(array $data): array{
+		$errors = [];
 
-      if(mysqli_num_rows($result) > 0){
-         $error[] = 'user already exist!';
-   }else{
-      if($pass != $cpass){
-         $error[] = 'password not matched!';
-      }else{
-         $insert = "INSERT INTO user_form(name, email, password, user_type) VALUES('$name','$email','$pass','$user_type')";
-         mysqli_query($conn, $insert);
-         header('location: /index.php');
-      }
-   }
-   };
+		if (!filter_var($data["email"], FILTER_VALIDATE_EMAIL)){
+			$errors["email"] = true;
+		}
+
+      if (!filter_var($data["login"])){
+			$errors["login"] = true;
+		}
+
+		if (empty($data["name"])){
+			$errors["name"] = true;
+		}
+
+		if (empty($data["password"]) || empty($data["password_confirm"]) || $data["password"] != $data["password_confirm"]){
+			$errors["password"] = true;
+		}
+		return $errors;
+	}
+   
+   function storeUser(object $dbh, string $email, string $login, string $name, string $password): void{
+		$sql = "INSERT INTO `users` (`email`, `login`, `name`, `password`) VALUES (:email, :login, :name, :password)";
+		$params = [
+			"email" => $email,
+         "login" => $login,
+			"name" => $name,
+			"password" => password_hash($password, PASSWORD_DEFAULT)
+		];
+		$dbh->prepare($sql)->execute($params);
+	}

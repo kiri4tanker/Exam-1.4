@@ -1,3 +1,6 @@
+<?php require_once __DIR__ . "/database/database.php" ?>
+<?php require_once __DIR__ . "/models/register.php" ?>
+<?php require_once __DIR__ . "/models/logout.php" ?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -32,7 +35,7 @@
                   <input type="text" name="login" placeholder="Введите логин" class="input" required>
                   <input type="email" name="email" placeholder="Введите email" class="input" required>
                   <input type="password" name="password" placeholder="Введите пароль" class="input" required>
-                  <input type="password" name="cpassword" placeholder="Повторите пароль" class="input" required>
+                  <input type="password" name="password_confirm" placeholder="Повторите пароль" class="input" required>
                   <div class="checkbox">
                      <input class="checkbox__input" type="checkbox" name="checkbox" id="checkbox" required></input>
                      <label class="checkbox__box" for="checkbox"></label>

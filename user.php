@@ -1,3 +1,6 @@
+<?php require_once __DIR__ . "/database/database.php" ?>
+<?php require_once __DIR__ . "/models/user.php" ?>
+<?php require_once __DIR__ . "/models/logout.php" ?>
 <!doctype html>
 <html lang="ru">
 <head>
