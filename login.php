@@ -1,6 +1,3 @@
-<?php require_once __DIR__ . "/database/database.php" ?>
-<?php require_once __DIR__ . "/models/login.php" ?>
-<?php require_once __DIR__ . "/models/logout.php" ?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -18,7 +15,10 @@
             <a href="index.php" class="logo">
                <img src="assets/images/logo/logo.png" alt="LOGO">
             </a>
-            <a href="login.php" class="btn">Главная</a>
+            <div class="inline">
+               <a href="index.php" class="btn">Главная</a>
+               <a href="register.php" class="btn">Создать аккаунт</a>
+            </div>
          </div>
       </div>
    </header>
@@ -29,8 +29,9 @@
                <h1 class="section__title">Вход в личный кабинет</h1>
             </div>
             <div class="section__content">
+               <!-- Форма авторизации -->
                <form action="" method="post" class="login">
-                  <h3 class="login__name">Авторизация</h3>
+                  <h2 class="login__name">Авторизация</h2>
                   <input type="text" name="login" placeholder="Введите логин" class="input" required>
                   <input type="password" name="password" placeholder="Введите пароль" class="input" required>
                   <input type="submit" name="submit" value="Войти" class="btn">

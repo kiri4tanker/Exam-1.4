@@ -1,6 +1,3 @@
-<?php require_once __DIR__ . "/database/database.php" ?>
-<?php require_once __DIR__ . "/models/user.php" ?>
-<?php require_once __DIR__ . "/models/logout.php" ?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -18,7 +15,10 @@
             <a href="index.php" class="logo">
                <img src="assets/images/logo/logo.svg" alt="LOGO">
             </a>
-            <a href="login.php" class="btn">Главная</a>
+            <div class="inline">
+               <a href="index.php" class="btn">Главная</a>
+               <button type="submit" class="btn">Выйти</button>
+            </div>
          </div>
       </div>
    </header>

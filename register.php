@@ -1,6 +1,3 @@
-<?php require_once __DIR__ . "/database/database.php" ?>
-<?php require_once __DIR__ . "/models/register.php" ?>
-<?php require_once __DIR__ . "/models/logout.php" ?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -18,7 +15,10 @@
             <a href="index.php" class="logo">
                <img src="assets/images/logo/logo.svg" alt="LOGO">
             </a>
-            <a href="login.php" class="btn">Главная</a>
+            <div class="inline">
+               <a href="index.php" class="btn">Главная</a>
+               <a href="login.php" class="btn">Войти</a>
+            </div>
          </div>
       </div>
    </header>
@@ -29,6 +29,7 @@
                <h1 class="section__title">Регистрация на сайте</h1>
             </div>
             <div class="section__content">
+               <!-- Форма регистрации -->
                <form action="" method="post" class="register">
                   <h3 class="register__name">Регистрация</h3>
                   <input type="text" name="name" placeholder="Введите ФИО" class="input" required>
@@ -39,12 +40,14 @@
                   <div class="checkbox">
                      <input class="checkbox__input" type="checkbox" name="checkbox" id="checkbox" required></input>
                      <label class="checkbox__box" for="checkbox"></label>
-                     <label for="checkbox" class="checkbox__text">Согласие на обработку персональных данных</label>
+                     <label for="checkbox" class="checkbox__text text_muted">Согласие на обработку персональных данных</label>
                   </div>
-                  <input type="submit" value="Создать аккаунт" class="btn">
-                  <div class="inline">
-                     <p class="register__text">Уже есть аккаунт?</p>
-                     <a href="login.php" class="link">Войти</a>
+                  <div class="inline inline__between">
+                     <button type="submit" class="btn">Создать аккаунт</button>
+                     <div class="inline">
+                        <a class="register__text text_muted">Уже есть аккаунт?</a>
+                        <a href="login.php" class="link">Войти</a>
+                     </div>
                   </div>
                </form>
             </div>
