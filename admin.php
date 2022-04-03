@@ -29,7 +29,47 @@
                <h1 class="section__title">Административная панель</h1>
             </div>
             <div class="section__content">
-               
+            <div class="profile">
+               <div class="profile__heading">
+                  <h2 class="profile__title">Все заявки</h2>
+                  <button class="btn">Создать категорию</button>
+               </div>
+               <div class="profule__content">
+                  <table class="table">
+                     <tr class="row row_title">
+                        <td class="column">Временная метка</td>
+                        <td class="column">Название</td>
+                        <td class="column">Описание</td>
+                        <td class="column">Категория</td>
+                        <td class="column">Статус</td>
+                        <td class="column" colspan="2">Изменение</td>
+                     </tr>
+                     <tr class="row">
+                        <td class="column">Временная метка</td>
+                        <td class="column">Название</td>
+                        <td class="column">Описание</td>
+                        <td class="column">Категория</td>
+                        <td class="column">Статус</td>
+                        <td class="column"><a href="" class="link">Сменить статус</a></td>
+                     </tr>
+                     <tr class="row">
+                        <td class="column">Временная метка</td>
+                        <td class="column">Название</td>
+                        <td class="column">Описание</td>
+                        <td class="column">Категория</td>
+                        <td class="column">Статус</td>
+                        <td class="column"><a href="" class="link">Сменить статус</a></td>
+                     </tr>
+                     <tr class="row">
+                        <td class="column">Временная метка</td>
+                        <td class="column">Название</td>
+                        <td class="column">Описание</td>
+                        <td class="column">Категория</td>
+                        <td class="column">Статус</td>
+                        <td class="column"><a href="" class="link">Сменить статус</a></td>
+                     </tr>
+                  </table>
+               </div>
             </div>
          </div>
       </section>

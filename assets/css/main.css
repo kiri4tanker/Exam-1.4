@@ -285,3 +285,27 @@ textarea.input {
 .register .btn {
 	justify-self: start;
 }
+/* table */
+.table {
+	text-align: center;
+	width: 100%;
+	margin-bottom: 20px;
+	border: 1px solid var(--border-color);
+	border-collapse: collapse;
+}
+.table .row {
+	border: 1px solid var(--border-color);
+	padding: 10px;
+}
+.table .row_title {
+	font-weight: bold;
+	background: var(--item-color);
+}
+.table .column {
+	border: 1px solid var(--border-color);
+	padding: 10px;
+}
+/* profile */
+.profile__heading {
+	margin-bottom: 20px;
+}
