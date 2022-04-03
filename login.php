@@ -13,7 +13,7 @@
       <div class="container">
          <div class="header__content">
             <a href="index.php" class="logo">
-               <img src="assets/images/logo/logo.png" alt="LOGO">
+               <img src="assets/images/logo/logo.svg" alt="LOGO">
             </a>
             <div class="inline">
                <a href="index.php" class="btn">Главная</a>
