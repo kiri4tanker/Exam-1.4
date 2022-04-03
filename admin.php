@@ -50,7 +50,8 @@
                         <td class="column">Описание</td>
                         <td class="column">Категория</td>
                         <td class="column">Статус</td>
-                        <td class="column"><a href="" class="link">Сменить статус</a></td>
+                        <td class="column"><a href="" class="link">Решено</a></td>
+                        <td class="column"><a href="" class="link">Отклонено</a></td>
                      </tr>
                      <tr class="row">
                         <td class="column">Временная метка</td>
@@ -58,7 +59,8 @@
                         <td class="column">Описание</td>
                         <td class="column">Категория</td>
                         <td class="column">Статус</td>
-                        <td class="column"><a href="" class="link">Сменить статус</a></td>
+                        <td class="column"><a href="" class="link">Решено</a></td>
+                        <td class="column"><a href="" class="link">Отклонено</a></td>
                      </tr>
                      <tr class="row">
                         <td class="column">Временная метка</td>
@@ -66,7 +68,8 @@
                         <td class="column">Описание</td>
                         <td class="column">Категория</td>
                         <td class="column">Статус</td>
-                        <td class="column"><a href="" class="link">Сменить статус</a></td>
+                        <td class="column"><a href="" class="link">Решено</a></td>
+                        <td class="column"><a href="" class="link">Отклонено</a></td>
                      </tr>
                   </table>
                </div>

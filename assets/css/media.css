@@ -1,0 +1,6 @@
+/* media */
+@media (max-width: 992px) {
+	.applications {
+		grid-template-columns: 1fr;
+	}
+}

@@ -17,7 +17,7 @@
             </a>
             <div class="inline">
                <a href="index.php" class="btn">Главная</a>
-               <a href="register.php" class="btn">Создать аккаунт</a>
+               <button type="submit" class="btn">Выйти</button>
             </div>
          </div>
       </div>
@@ -26,22 +26,18 @@
       <section class="section">
          <div class="container">
             <div class="section__heading">
-               <h1 class="section__title">Вход в личный кабинет</h1>
+               <h1 class="section__title">Создание категории</h1>
             </div>
             <div class="section__content">
-               <!-- Оповещение -->
-               <div class="alert">
-						<div class="alert__content">
-							<span class="alert__text">Некоректный ввод</span>
-							<button class="alert__close">&times;</button>
-						</div>
-					</div>
-               <!-- Форма авторизации -->
-               <form action="" method="post" class="form">
-                  <h2 class="login__name">Авторизация</h2>
-                  <input type="text" name="login" placeholder="Введите логин" class="input" required>
-                  <input type="password" name="password" placeholder="Введите пароль" class="input" required>
-                  <input type="submit" name="submit" value="Войти" class="btn">
+               <!-- Форма создания удаления заявки -->
+               <form action="" method="post" class="form form_center">
+                  <h2 class="form__name">Удаление</h2>
+                  <p class="form__text">Вы уверены, что хотите удалить заявку?</p>
+                  <button type="submit" class="btn">Удалить</button>
+                     <div class="inline">
+                        <span class="form__text text_muted">Если вы передумали, то</span>
+                        <a href="user.php.php" class="link">Вернуться</a>
+                     </div>
                </form>
             </div>
          </div>

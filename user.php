@@ -34,7 +34,20 @@
                      <h2 class="profile__title">Мои заявки</h2>
                      <button class="btn">Создать заявку</button>
                   </div>
-                  <div class="profule__content">
+                  <div class="profile__content">
+                     <!-- Фильтр -->
+                     <div class="inline">
+                        <form class="inline__between">
+                           <select class="input" name="filter">
+                              <option selected disabled >Сортировать по статусу</option>
+                              <option value="Новая">Новая</option>
+                              <option value="Решена">Решена</option>
+                              <option value="Отклонена">Отклонена</option>
+                           </select>
+                           <button class="btn">Вывести</button>
+                        </form>
+					      </div>
+                     <!-- Таблица с заявками -->
                      <table class="table">
                         <tr class="row row_title">
                            <td class="column">Временная метка</td>
@@ -42,7 +55,7 @@
                            <td class="column">Описание</td>
                            <td class="column">Категория</td>
                            <td class="column">Статус</td>
-                           <td class="column" colspan="2">Изменение</td>
+                           <td class="column">Изменение</td>
                         </tr>
                         <tr class="row">
                            <td class="column">Временная метка</td>
@@ -51,7 +64,6 @@
                            <td class="column">Категория</td>
                            <td class="column">Статус</td>
                            <td class="column"><a href="" class="link">Удалить</a></td>
-                           <td class="column"><a href="" class="link">Редактировать</a></td>
                         </tr>
                         <tr class="row">
                            <td class="column">Временная метка</td>
@@ -60,7 +72,6 @@
                            <td class="column">Категория</td>
                            <td class="column">Статус</td>
                            <td class="column"><a href="" class="link">Удалить</a></td>
-                           <td class="column"><a href="" class="link">Редактировать</a></td>
                         </tr>
                         <tr class="row">
                            <td class="column">Временная метка</td>
@@ -69,7 +80,6 @@
                            <td class="column">Категория</td>
                            <td class="column">Статус</td>
                            <td class="column"><a href="" class="link">Удалить</a></td>
-                           <td class="column"><a href="" class="link">Редактировать</a></td>
                         </tr>
                      </table>
                   </div>

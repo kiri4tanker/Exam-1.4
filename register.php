@@ -29,8 +29,15 @@
                <h1 class="section__title">Регистрация на сайте</h1>
             </div>
             <div class="section__content">
+               <!-- Оповещение -->
+               <div class="alert">
+						<div class="alert__content">
+							<span class="alert__text">Некоректный ввод</span>
+							<button class="alert__close">&times;</button>
+						</div>
+					</div>
                <!-- Форма регистрации -->
-               <form action="" method="post" class="register">
+               <form action="" method="post" class="form">
                   <h3 class="register__name">Регистрация</h3>
                   <input type="text" name="name" placeholder="Введите ФИО" class="input" required>
                   <input type="text" name="login" placeholder="Введите логин" class="input" required>
@@ -45,7 +52,7 @@
                   <div class="inline inline__between">
                      <button type="submit" class="btn">Создать аккаунт</button>
                      <div class="inline">
-                        <a class="register__text text_muted">Уже есть аккаунт?</a>
+                        <span class="register__text text_muted">Уже есть аккаунт?</span>
                         <a href="login.php" class="link">Войти</a>
                      </div>
                   </div>

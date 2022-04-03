@@ -17,7 +17,7 @@
             </a>
             <div class="inline">
                <a href="index.php" class="btn">Главная</a>
-               <a href="register.php" class="btn">Создать аккаунт</a>
+               <button type="submit" class="btn">Выйти</button>
             </div>
          </div>
       </div>
@@ -26,22 +26,22 @@
       <section class="section">
          <div class="container">
             <div class="section__heading">
-               <h1 class="section__title">Вход в личный кабинет</h1>
+               <h1 class="section__title">Создание заявки</h1>
             </div>
             <div class="section__content">
-               <!-- Оповещение -->
-               <div class="alert">
-						<div class="alert__content">
-							<span class="alert__text">Некоректный ввод</span>
-							<button class="alert__close">&times;</button>
-						</div>
-					</div>
-               <!-- Форма авторизации -->
+               <!-- Форма создания заявки -->
                <form action="" method="post" class="form">
-                  <h2 class="login__name">Авторизация</h2>
-                  <input type="text" name="login" placeholder="Введите логин" class="input" required>
-                  <input type="password" name="password" placeholder="Введите пароль" class="input" required>
-                  <input type="submit" name="submit" value="Войти" class="btn">
+                  <h2 class="login__name">Создание</h2>
+                  <input type="text" name="login" placeholder="Введите название" class="input" required>
+                  <select class="input text_muted" name="category" required>
+                     <option selected disabled >Категории на выбор</option>
+                     <option value="Новая">Дорога</option>
+                     <option value="Решена">Дом</option>
+                     <option value="Отклонена">Ремонт</option>
+                  </select>
+                  <textarea name="description" id="description" class="input text_muted" placeholder="Описание" required></textarea>
+                  <input type="file" name="file" placeholder="Добавить фото" class="text_muted" required>
+                  <input type="submit" name="submit" value="Создать" class="btn">
                </form>
             </div>
          </div>

@@ -112,6 +112,8 @@ body {
 .inline__between {
 	display: flex;
 	justify-content: space-between;
+	gap: var(--gutter);
+	margin-bottom: 20px;
 }
 /* container */
 .container {
@@ -249,10 +251,9 @@ textarea.input {
 	display: block;
 	margin: 10px 0;
 }
-/* login */
-.login {
+/* form */
+.form {
 	text-align: center;
-	grid-auto-rows: 40px;
 	max-width: 600px;
 	margin: 0 auto;
    height: 100%;
@@ -264,26 +265,15 @@ textarea.input {
    box-shadow: var(--shadow);
    border-radius: var(--round);
 }
-.login .btn {
+.form .btn {
 	justify-self: start;
 }
-/* register */
-.register {
-	text-align: center;
-	grid-auto-rows: 40px;
-	max-width: 600px;
-	margin: 0 auto;
-   height: 100%;
-   align-content: center;
-   display: grid;
-   gap: var(--gutter);
-   border: 1px solid var(--border-color);
-   padding: 20px;
-   box-shadow: var(--shadow);
-   border-radius: var(--round);
+/* center */
+.form_center {
+	justify-items: center;
 }
-.register .btn {
-	justify-self: start;
+.form_center .btn {
+	justify-self: center;
 }
 /* table */
 .table {
@@ -308,4 +298,37 @@ textarea.input {
 /* profile */
 .profile__heading {
 	margin-bottom: 20px;
+}
+/* alert */
+.alert {
+	color: var(--bg-color);
+	background: var(--accent-color);
+	padding: 0 20px;
+	border-radius: var(--round);
+	margin: 20px 0;
+	transition: var(--time) max-height, var(--time) margin;
+	max-height: 60px;
+}
+.alert_closed {
+	margin: 0;
+	max-height: 0;
+	pointer-events: none;
+	user-select: none;
+}
+.alert__content {
+	height: 60px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: var(--gutter);
+}
+.alert__close {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 20px;
+	height: 20px;
+	font-size: var(--h2-size);
+	color: var(--bg-color);
+	cursor: pointer;
 }

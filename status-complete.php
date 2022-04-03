@@ -4,7 +4,7 @@
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Авторизация</title>
+   <title>Решена</title>
    <link rel="stylesheet" href="assets/css/main.css">
    <link rel="stylesheet" href="assets/css/media.css">
 </head>
@@ -17,7 +17,7 @@
             </a>
             <div class="inline">
                <a href="index.php" class="btn">Главная</a>
-               <a href="register.php" class="btn">Создать аккаунт</a>
+               <button type="submit" class="btn">Выйти</button>
             </div>
          </div>
       </div>
@@ -26,22 +26,14 @@
       <section class="section">
          <div class="container">
             <div class="section__heading">
-               <h1 class="section__title">Вход в личный кабинет</h1>
+               <h1 class="section__title">Изменение статуса заявки</h1>
             </div>
             <div class="section__content">
-               <!-- Оповещение -->
-               <div class="alert">
-						<div class="alert__content">
-							<span class="alert__text">Некоректный ввод</span>
-							<button class="alert__close">&times;</button>
-						</div>
-					</div>
-               <!-- Форма авторизации -->
-               <form action="" method="post" class="form">
-                  <h2 class="login__name">Авторизация</h2>
-                  <input type="text" name="login" placeholder="Введите логин" class="input" required>
-                  <input type="password" name="password" placeholder="Введите пароль" class="input" required>
-                  <input type="submit" name="submit" value="Войти" class="btn">
+               <!-- Форма изменения статуса заявки -->
+               <form action="" method="post" class="form form_center">
+                  <h2 class="form__name">Решение заявки</h2>
+                  <input type="file" name="file" placeholder="Добавить фото" class="text_muted" required>
+                  <input type="submit" name="submit" value="Отклонено" class="btn">
                </form>
             </div>
          </div>
