@@ -4,9 +4,8 @@
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Авторизация</title>
+   <title>Список категорий заявок</title>
    <link rel="stylesheet" href="assets/css/main.css">
-   <link rel="stylesheet" href="assets/css/media.css">
 </head>
 <body>
    <header class="header">
@@ -15,10 +14,7 @@
             <a href="index.php" class="logo">
                <img src="assets/images/logo/logo.svg" alt="LOGO">
             </a>
-            <div class="inline">
-               <a href="index.php" class="btn">Главная</a>
-               <button type="submit" class="btn">Выйти</button>
-            </div>
+            <a href="admin.php" class="btn">Админ-панель</a>
          </div>
       </div>
    </header>
@@ -26,15 +22,31 @@
       <section class="section">
          <div class="container">
             <div class="section__heading">
-               <h1 class="section__title">Создание категории</h1>
+               <h1 class="section__title">Категории</h1>
             </div>
             <div class="section__content">
-               <!-- Форма создания категории -->
-               <form action="" method="post" class="form">
-                  <h2 class="login__name">Создание</h2>
-                  <input type="text" name="login" placeholder="Введите название" class="input" required>
-                  <input type="submit" name="submit" value="Создать" class="btn">
-               </form>
+               <div class="inline">
+                  <form class="inline__between">
+                     <!-- Добавление новой категории -->
+                     <input required name="title" type="text" class="input" placeholder="Название категории">
+                     <button class="btn">Добавить</button>
+                  </form>
+               </div>
+               <div class="profile__content">
+                  <!-- Таблица заявок -->
+                  <table class="table">
+                     <!-- Название колонок -->
+                     <tr class="row row_title">
+                        <td class="column">Название</td>
+                        <td class="column">Изменение</td>
+                     </tr>
+                     <!-- Колонки -->
+                     <tr class="row">
+                        <td class="column">Ремонт дороги</td>
+                        <td class="column"><a href="#" data-modal-open="app-category-delete" data-app-id="1" class="link">Удалить</a></td>
+                     </tr>
+                  </table>
+               </div>
             </div>
          </div>
       </section>
@@ -49,6 +61,28 @@
          </div>
       </div>
    </footer>
+   <!-- Удаление категории модальное окно -->
+	<div class="modal" id="app-category-delete">
+		<div class="modal__overlay" data-modal-close></div>
+		<div class="modal__window">
+			<div class="modal__heading">
+				<h3 class="modal__title">Удалить категорию заявки?</h3>
+				<button class="btn-close" data-modal-close>&times;</button>
+			</div>
+			<div class="modal__content">
+				<p>Все заявки с данной категорией будут удалены!</p>
+				<form style="width: 100%;">
+					<input type="hidden" name="app-category-delete-id" id="app-category-delete-id">
+					<div class="inline">
+						<button class="btn">Удалить</button>
+						<a class="btn" href="#" data-modal-close>Закрыть</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+   <script src="assets/js/modal.js"></script>
    <script src="assets/js/main.js"></script>
 </body>
 </html>
