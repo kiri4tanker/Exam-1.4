@@ -30,18 +30,18 @@
             </div>
             <div class="section__content">
                <!-- Оповещение -->
-               <div class="alert">
+               <div class="alert alert_closed">
 						<div class="alert__content">
-							<span class="alert__text">Некоректный ввод</span>
-							<button class="alert__close">&times;</button>
+							<span class="alert__text"></span>
+							<button class="btn-close">&times;</button>
 						</div>
 					</div>
                <!-- Форма авторизации -->
                <form action="" method="post" class="form">
                   <h2 class="login__name">Авторизация</h2>
-                  <input type="text" name="login" placeholder="Введите логин" class="input" required>
-                  <input type="password" name="password" placeholder="Введите пароль" class="input" required>
-                  <input type="submit" name="submit" value="Войти" class="btn">
+                  <input name="login" id="login" type="text" class="input" placeholder="Введите логин">
+                  <input name="password" id="password" type="password" class="input" placeholder="Введите пароль">
+                  <button class="btn">Войти</button>
                </form>
             </div>
          </div>
@@ -58,6 +58,7 @@
       </div>
    </footer>
    
+   <script src="assets/js/validate.js"></script>
    <script src="assets/js/main.js"></script>
 </body>
 </html>

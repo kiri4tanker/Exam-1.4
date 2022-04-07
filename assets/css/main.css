@@ -196,6 +196,7 @@ body {
 	background: var(--accent-color-hover);
 }
 .btn-close {
+	color: var(--bg-color);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -203,7 +204,6 @@ body {
 	height: 20px;
 	font-size: var(--h2-size);
 	transition: var(--time) opacity;
-	cursor: pointer;
 }
 .btn-close:hover {
 	opacity: 0.6;
@@ -222,6 +222,9 @@ textarea.input {
 }
 .input::placeholder {
 	color: var(--text-muted-color);
+}
+.input_danger {
+	border-color: var(--accent-color);
 }
 /* link */
 .link {
@@ -375,6 +378,9 @@ textarea.input {
 	transition: var(--time) max-height, var(--time) margin;
 	max-height: 60px;
 }
+.alert + .alert {
+	margin-top: var(--gutter);
+}
 .alert_closed {
 	margin: 0;
 	max-height: 0;
@@ -387,16 +393,6 @@ textarea.input {
 	justify-content: space-between;
 	align-items: center;
 	gap: var(--gutter);
-}
-.alert__close {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 20px;
-	height: 20px;
-	font-size: var(--h2-size);
-	color: var(--bg-color);
-	cursor: pointer;
 }
 /* media */
 @media (max-width: 992px) {

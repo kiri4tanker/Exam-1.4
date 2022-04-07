@@ -30,27 +30,26 @@
             </div>
             <div class="section__content">
                <!-- Оповещение -->
-               <div class="alert">
+               <div class="alert alert_closed">
 						<div class="alert__content">
-							<span class="alert__text">Некоректный ввод</span>
-							<button class="alert__close">&times;</button>
+							<span class="alert__text"></span>
+							<button class="btn-close">&times;</button>
 						</div>
 					</div>
                <!-- Форма регистрации -->
-               <form action="" method="post" class="form">
+               <form action="" id="register-form" method="post" class="form">
                   <h3 class="register__name">Регистрация</h3>
-                  <input type="text" name="name" placeholder="Введите ФИО" class="input" required>
-                  <input type="text" name="login" placeholder="Введите логин" class="input" required>
-                  <input type="email" name="email" placeholder="Введите email" class="input" required>
-                  <input type="password" name="password" placeholder="Введите пароль" class="input" required>
-                  <input type="password" name="password_confirm" placeholder="Повторите пароль" class="input" required>
+                  <input name="name" id="name" type="text" class="input" placeholder="Введите ФИО">
+						<input name="login" id="login" type="text" class="input" placeholder="Введите логин">
+						<input name="email" id="email" type="email" class="input" placeholder="Введите почту">
+						<input name="password" id="password" type="password" class="input" placeholder="Введите пароль">
+						<input name="password-repeat" id="password-repeat" type="password" class="input" placeholder="Повторите пароль">
                   <div class="checkbox">
-                     <input class="checkbox__input" type="checkbox" name="checkbox" id="checkbox" required></input>
-                     <label class="checkbox__box" for="checkbox"></label>
-                     <label for="checkbox" class="checkbox__text text_muted">Согласие на обработку персональных данных</label>
+                     <input class="checkbox__input" type="checkbox" name="privacy" id="privacy"></input>
+                     <label for="privacy" class="checkbox__text text_muted">Согласие на обработку персональных данных</label>
                   </div>
                   <div class="inline inline__between">
-                     <button type="submit" class="btn">Создать аккаунт</button>
+                     <button class="btn">Создать аккаунт</button>
                      <div class="inline">
                         <span class="register__text text_muted">Уже есть аккаунт?</span>
                         <a href="login.php" class="link">Войти</a>
@@ -72,6 +71,7 @@
       </div>
    </footer>
    
+   <script src="assets/js/validate.js"></script>
    <script src="assets/js/main.js"></script>
 </body>
 </html>
