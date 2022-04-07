@@ -37,7 +37,7 @@
 						</div>
 					</div>
                <!-- Форма авторизации -->
-               <form action="" method="post" class="form">
+               <form action="" id="login-form" method="post" class="form">
                   <h2 class="login__name">Авторизация</h2>
                   <input name="login" id="login" type="text" class="input" placeholder="Введите логин">
                   <input name="password" id="password" type="password" class="input" placeholder="Введите пароль">
@@ -58,7 +58,6 @@
       </div>
    </footer>
    
-   <script src="assets/js/validate.js"></script>
    <script src="assets/js/main.js"></script>
 </body>
 </html>
