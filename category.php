@@ -1,3 +1,17 @@
+<?php
+	require $_SERVER['DOCUMENT_ROOT'] . '/models/UserModel.php';
+	require $_SERVER['DOCUMENT_ROOT'] . '/models/AppModel.php';
+
+	$userModel = new UserModel();
+
+	if (!$userModel->isLogged()) return $userModel->redirect('index.php');
+	if (!$userModel->isAdmin()) return $userModel->redirect('profile.php');
+
+	$appModel = new AppModel();
+
+	$appCats = $appModel->getCats();
+	$appCatsNotEmpty = !empty($appCats);
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -14,7 +28,7 @@
             <a href="index.php" class="logo">
                <img src="assets/images/logo/logo.svg" alt="LOGO">
             </a>
-            <a href="admin.php" class="btn">Админ-панель</a>
+            <a href="admin.php" class="btn"><?= $userModel->get('name') ?></a>
          </div>
       </div>
    </header>
@@ -26,27 +40,33 @@
             </div>
             <div class="section__content">
                <div class="inline">
-                  <form class="inline__between">
+                  <form class="inline__between" action="actions/appCategoryAdd.php" method="post">
                      <!-- Добавление новой категории -->
-                     <input required name="title" type="text" class="input" placeholder="Название категории">
+                     <input required name="name" type="text" class="input" placeholder="Название категории">
                      <button class="btn">Добавить</button>
                   </form>
                </div>
                <div class="profile__content">
                   <!-- Таблица заявок -->
-                  <table class="table">
-                     <!-- Название колонок -->
-                     <tr class="row row_title">
-                        <td class="column">Название</td>
-                        <td class="column">Изменение</td>
-                     </tr>
-                     <!-- Колонки -->
-                     <tr class="row">
-                        <td class="column">Ремонт дороги</td>
-                        <td class="column"><a href="#" data-modal-open="app-category-delete" data-app-id="1" class="link">Удалить</a></td>
-                     </tr>
-                  </table>
+                  <?php if ($appCatsNotEmpty): ?>
+                     <table class="table">
+                        <!-- Название колонок -->
+                        <tr class="row row_title">
+                           <td class="column">Название</td>
+                           <td class="column">Изменение</td>
+                        </tr>
+                        <?php foreach($appCats as $cat): ?>
+                        <!-- Колонки -->
+                        <tr class="row">
+                           <td><?= $cat['name'] ?></td>
+									<td><a href="#" data-modal-open="app-category-delete" data-app-id="<?= $cat['id'] ?>" class="link">Удалить</a></td>
+                        </tr>
+                        <?php endforeach; ?>
+                     </table>
                </div>
+               <?php else: ?>
+						<p>К сожалению, категорий заявок пока нет.</p>
+					<?php endif; ?>
             </div>
          </div>
       </section>

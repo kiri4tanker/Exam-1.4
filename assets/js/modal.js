@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-	// modal
+	// Моальное окно
 
 	const modalTriggers = document.querySelectorAll('[data-modal-open]')
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		})
 	})
 
-	// utils
+	// Утилиты
 
 	const passData = (triggers, attrToPass, InputToPass) => {
 
@@ -42,28 +42,28 @@ document.addEventListener('DOMContentLoaded', () => {
 		})
 	}
 
-	// app cancel form
+	// Отмена
 
 	const appCancelTriggers = document.querySelectorAll('[data-modal-open="app-cancel"]')
 	const appCancelInput = document.getElementById('app-cancel-id')
 
 	passData(appCancelTriggers, 'data-app-id', appCancelInput)
 
-	// app cancel form
+	// Подтверждение
 
 	const appApproveTriggers = document.querySelectorAll('[data-modal-open="app-approve"]')
 	const appApproveInput = document.getElementById('app-approve-id')
 
 	passData(appApproveTriggers, 'data-app-id', appApproveInput)
 
-	// app category delete form
+	// Удаление категории
 
 	const appCategoryDeleteTriggers = document.querySelectorAll('[data-modal-open="app-category-delete"]')
 	const appCategoryDeleteInput = document.getElementById('app-category-delete-id')
 
 	passData(appCategoryDeleteTriggers, 'data-app-id', appCategoryDeleteInput)
 
-	// app delete form
+	// Удаление заявки
 
 	const appDeleteTriggers = document.querySelectorAll('[data-modal-open="app-delete"]')
 	const appDeleteInput = document.getElementById('app-delete-id')

@@ -1,3 +1,23 @@
+<?php
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/models/UserModel.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/models/AppModel.php';
+
+	$userModel = new UserModel();
+	$appModel = new AppModel();
+
+	if (!$userModel->isLogged()) return $userModel->redirect('index.php');
+	if ($userModel->isAdmin()) return $userModel->redirect('admin.php');	
+
+	$status = $_GET['status'] ?? '';
+
+	if (empty($status)) {
+		$apps = $userModel->getApps();
+	} else {
+		$apps = $userModel->getAppsWithStatus($status);
+	}
+
+	$appsNotNull = !empty($apps);
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -26,7 +46,7 @@
       <section class="section">
          <div class="container">
             <div class="section__heading">
-               <h1 class="section__title">Личный кабинет</h1>
+               <h1 class="section__title">Добро пожаловать, <?= $userModel->get('name'); ?>. Вот ваши заявки:</h1>
             </div>
             <div class="section__content">
                <div class="profile">
@@ -37,11 +57,12 @@
                      <!-- Фильтр -->
                      <div class="inline">
                         <form class="inline__between">
-                           <select class="input" name="filter">
-                              <option selected disabled >Сортировать по статусу</option>
-                              <option value="Новая">Новая</option>
-                              <option value="Решена">Решена</option>
-                              <option value="Отклонена">Отклонена</option>
+                           <!-- Статусы -->
+                           <select class="input" name="status">
+                              <option value="">Все заявки</option>
+                              <option <?= $status == 'Новая' ? 'selected' : '' ?> value="Новая">Новая</option>
+								      <option <?= $status == 'Решена' ? 'selected' : '' ?> value="Решена">Решена</option>
+								      <option <?= $status == 'Отклонена' ? 'selected' : '' ?> value="Отклонена">Отклонена</option>
                            </select>
                            <button class="btn">Вывести</button>
                         </form>
@@ -58,32 +79,38 @@
                            <td class="column">Изменение</td>
                         </tr>
                         <!-- Колонка -->
-                        <tr class="row">
-                           <td class="column">Временная метка</td>
-                           <td class="column">Название</td>
-                           <td class="column">Описание</td>
-                           <td class="column">Категория</td>
-                           <td class="column">Статус</td>
-                           <td class="column"><a href="#" data-modal-open="app-delete" data-app-id="4" class="link">Удалить</a></td>
-                        </tr>
-                        <tr class="row">
-                           <td class="column">Временная метка</td>
-                           <td class="column">Название</td>
-                           <td class="column">Описание</td>
-                           <td class="column">Категория</td>
-                           <td class="column">Статус</td>
-                           <td class="column"><a href="#" data-modal-open="app-delete" data-app-id="4" class="link">Удалить</a></td>
-                        </tr>
-                        <tr class="row">
-                           <td class="column">Временная метка</td>
-                           <td class="column">Название</td>
-                           <td class="column">Описание</td>
-                           <td class="column">Категория</td>
-                           <td class="column">Статус</td>
-                           <td class="column"><a href="#" data-modal-open="app-delete" data-app-id="4" class="link">Удалить</a></td>
-                        </tr>
+                        <?php foreach($apps as $app): ?>
+										<?php
+                                 // Статусы 
+											$notNew = $appModel->getField('status', $app['id']) != 'Новая';
+											$isApproved = $appModel->getField('status', $app['id']) == 'Решена';
+											$isCancel = $appModel->getField('status', $app['id']) == 'Отклонена';
+
+                                 $color = '';
+
+											if ($isApproved) {
+												$color = 'text-accent';
+											} elseif ($isCancel) {
+												$color = 'text-danger';
+											}
+										?>
+                              <tr>
+											<td><?= $app['name'] ?></td>
+											<td>
+												<p class="<?= $color ?>"><?= $app['status'] ?></p>
+												<p><?= $isCancel ? 'Причина: ' . $app['reason'] : '' ?></p>
+											</td>
+											<td><?= $appModel->getCat($app['cat_id']) ?></td>
+											<td><?= $app['created'] ?></td>
+											<td><?= $app['text'] ?></td>
+											<td><a href="#" data-modal-open="app-delete" data-app-id="<?= $app['id'] ?>" class="link link_danger <?= $notNew ? 'link_disabled' : '' ?>">Удалить</a></td>
+										</tr>
+									<?php endforeach; ?>
                      </table>
                   </div>
+                  <?php else: ?>
+						   <p>Заявок не найдено.</p>
+					   <?php endif; ?>
                </div>
             </div>
          </div>

@@ -1,3 +1,23 @@
+<?php
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/models/UserModel.php';
+
+	$userModel = new UserModel();
+
+	if ($userModel->isLogged()) return $userModel->redirect('profile.php');
+	if ($userModel->isAdmin()) return $userModel->redirect('admin.php');
+
+	$isError = false;
+
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		$login = $_POST['login'];
+		$password = $_POST['password'];
+		$submit = $_POST['submit'];
+	
+		if (isset($submit)) {
+			$isError = !$userModel->login($login, $password);
+		}
+	}
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -30,18 +50,20 @@
             </div>
             <div class="section__content">
                <!-- Оповещение -->
-               <div class="alert alert_closed">
-						<div class="alert__content">
-							<span class="alert__text"></span>
-							<button class="btn-close">&times;</button>
+               <?php if($isError): ?>
+						<div class="alert">
+							<div class="alert__content">
+								<span class="alert__text">Неправильная пара логин-пароль</span>
+								<button class="btn-close">&times;</button>
+							</div>
 						</div>
-					</div>
+					<?php endif; ?>
                <!-- Форма авторизации -->
                <form action="" id="login-form" method="post" class="form">
                   <h2 class="login__name">Авторизация</h2>
                   <input name="login" id="login" type="text" class="input" placeholder="Введите логин">
                   <input name="password" id="password" type="password" class="input" placeholder="Введите пароль">
-                  <button class="btn">Войти</button>
+                  <button name="submit" class="btn">Войти</button>
                </form>
             </div>
          </div>

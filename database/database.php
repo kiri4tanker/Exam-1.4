@@ -1,8 +1,12 @@
 <?php
+	require_once 'setupDatabase.php';
+
 	try {
-		$dbh = new PDO('mysql:host=localhost;dbname=city',"root", "");
-	} catch (\Exception $exception){
-		echo "Ошибка при подключении БД<br>";
-		echo $exception->getMessage();
-		die();
+		$db = new PDO('mysql:host=localhost', 'root', '', [
+			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+		]);
+
+		setupDatabase($db);
+	} catch(PDOException $e) {
+		echo $e;
 	}

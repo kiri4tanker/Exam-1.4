@@ -1,3 +1,11 @@
+<?php
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/models/UserModel.php';
+
+	$userModel = new UserModel();
+
+	if ($userModel->isLogged()) return $userModel->redirect('profile.php');
+	if ($userModel->isAdmin()) return $userModel->redirect('admin.php');
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -49,7 +57,7 @@
                      <label for="privacy" class="checkbox__text text_muted">Согласие на обработку персональных данных</label>
                   </div>
                   <div class="inline inline__between">
-                     <button class="btn">Создать аккаунт</button>
+                     <button name="submit" class="btn">Создать аккаунт</button>
                      <div class="inline">
                         <span class="register__text text_muted">Уже есть аккаунт?</span>
                         <a href="login.php" class="link">Войти</a>

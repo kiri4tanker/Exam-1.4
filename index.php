@@ -1,3 +1,13 @@
+<?php
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/models/UserModel.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/models/AppModel.php';
+
+	$userModel = new UserModel();
+	$appModel = new AppModel();
+
+	$solvedApps = $appModel->getApproved();
+	$solvedAppsNotEmpty = !empty($solvedApps);
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -16,6 +26,13 @@
                <img src="assets/images/logo/logo.svg" alt="LOGO">
             </a>
             <div class="inline">
+               <?php if($userModel->islogged()): ?>
+						<?php if($userModel->isAdmin()): ?>
+							<a href="admin.php" class="btn"><?= $userModel->get('name'); ?></a>
+						<?php else: ?>
+							<a href="profile.php" class="btn"><?= $userModel->get('name'); ?></a>
+						<?php endif; ?>
+					<?php else: ?>
                <a href="login.php" class="btn">Войти</a>
                <a href="register.php" class="btn">Создать аккаунт</a>
             </div>
@@ -30,62 +47,36 @@
             </div>
             <div class="section__content">
                <!-- Счётчик решенных заявок -->
-               <div class="counter">
-                  <span class="counter__name">Количество решенных заявок</span>
-               </div>
+               <div class="app-counter">
+						<span class="app-counter__text text_muted">Заявок решено:</span>
+						<strong class="app-counter__value text_muted">0</strong>
+					</div>
                <!-- Решенные заявки -->
+               <?php if ($solvedAppsNotEmpty): ?>
                <div class="applications">
-                  <!-- 1 заявка -->
-                  <div class="application">
-                     <div class="application__photos">
-                        <img src="assets/images/applications/after/car.jpg" alt="after" class="application__img application__img_after">
-                        <img src="assets/images/applications/before/car-before.jpg" alt="before" class="application__img application__img_before">
-                     </div>
-                     <p class="application__name">Ремонт дороги</p>
-                     <div class="inline">
-                        <p class="application__category">Ремонт</p>
-                        <p class="application__date">08.01.2002</p>
-                     </div>
-                  </div>
-                  <!-- 2 заявка -->
-                  <div class="application">
-                     <div class="application__photos">
-                        <img src="assets/images/applications/after/car.jpg" alt="after" class="application__img application__img_after">
-                        <img src="assets/images/applications/before/car-before.jpg" alt="before" class="application__img application__img_before">
-                     </div>
-                     <div class="application__text">
-                     <p class="application__name">Ремонт дороги</p>
-                     <div class="inline">
-                        <p class="application__category">Ремонт</p>
-                        <p class="application__date">08.01.2002</p>
-                     </div>
+                  <?php foreach($solvedApps as $app): ?>
+								<?php
+									$photo = 'data:image/png;base64,' . base64_encode($app['photo']);
+									$photoAfter = 'data:image/png;base64,' . base64_encode($app['photo_after']);
+								?>
+                     <!-- Заявка -->
+                     <div class="application">
+                        <div class="application__photos">
+                           <img src="<?= $photo ?>" alt="<?= $app['name'] . ' до' ?>" class="application__img application__img_after">
+                           <img src="<?= $photoAfter ?>" alt="<?= $app['name'] . ' после' ?>" class="application__img application__img_before">
+                        </div>
+                        <p class="application__name"><?= $app['name'] ?>"><?= $app['name'] ?></p>
+                        <div class="inline">
+                           <p class="application__date"><?= $app['created'] ?></p>
+                           <p class="application__category text-limit" title="<?= $appModel->getCat($app['cat_id']) ?>">Категория: <?= $appModel->getCat($app['cat_id']) ?></p>
+                        </div>
                      </div>
                   </div>
-                  <!-- 3 заявка -->
-                  <div class="application">
-                     <div class="application__photos">
-                        <img src="assets/images/applications/after/car.jpg" alt="after" class="application__img application__img_after">
-                        <img src="assets/images/applications/before/car-before.jpg" alt="before" class="application__img application__img_before">
-                     </div>
-                     <p class="application__name">Ремонт дороги</p>
-                     <div class="inline">
-                        <p class="application__category">Ремонт</p>
-                        <p class="application__date">08.01.2002</p>
-                     </div>
-                  </div>
-                  <!-- 4 заявка -->
-                  <div class="application">
-                     <div class="application__photos">
-                        <img src="assets/images/applications/after/car.jpg" alt="after" class="application__img application__img_after">
-                        <img src="assets/images/applications/before/car-before.jpg" alt="before" class="application__img application__img_before">
-                     </div>
-                     <p class="application__name">Ремонт дороги</p>
-                     <div class="inline">
-                        <p class="application__category">Ремонт</p>
-                        <p class="application__date">08.01.2002</p>
-                     </div>
-                  </div>
-               </div>
+                  <?php endforeach; ?>
+					</div>
+					<?php else: ?>
+						<p>Пока что решенных заявок нет. Но мы их будем решать, когда они начнут появляться, ага?</p>
+					<?php endif; ?>
             </div>
          </div>
       </section>
@@ -101,6 +92,7 @@
       </div>
    </footer>
    
+   <script src="assets/js/counter.js"></script>
    <script src="assets/js/main.js"></script>
 </body>
 </html>

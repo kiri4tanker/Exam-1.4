@@ -1,3 +1,19 @@
+<?php
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/models/UserModel.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/models/AppModel.php';
+
+	$userModel = new UserModel();
+	
+	if (!$userModel->isLogged()) return $userModel->redirect('index.php');
+	if (!$userModel->isAdmin()) return $userModel->redirect('profile.php');
+
+	$appModel = new AppModel();
+
+	$apps = $appModel->getAll();
+	$appsNotEmpty = !empty($apps);
+
+	$isError = $_GET['error'] ?? '';
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -26,9 +42,18 @@
       <section class="section">
          <div class="container">
             <div class="section__heading">
-               <h1 class="section__title">Административная панель</h1>
+               <h1 class="section__title">Добро пожаловать, <?= $userModel->get('name') ?>. Вот список всех заявок на сайте:</h1>
             </div>
             <div class="section__content">
+            <?php if($isError): ?>
+						<div class="alert">
+							<div class="alert__content">
+								<span class="alert__text">Размер файла слишком большой!</span>
+								<button class="btn-close">&times;</button>
+							</div>
+						</div>
+					<?php endif; ?>
+				<?php if($appsNotEmpty): ?>
             <div class="profile">
                <div class="profile__heading">
                   <h2 class="profile__title">Все заявки</h2>
@@ -46,34 +71,37 @@
                         <td class="column" colspan="2">Изменение</td>
                      </tr>
                      <!-- Колонки -->
-                     <tr class="row">
-                        <td class="column">Временная метка</td>
-                        <td class="column">Название</td>
-                        <td class="column">Описание</td>
-                        <td class="column">Категория</td>
-                        <td class="column">Статус</td>
-                        <td class="column"><a href="#" data-modal-open="app-approve" data-app-id="3" class="link">Решено</a></td>
-                        <td class="column"><a href="#" data-modal-open="app-cancel" data-app-id="4" class="link">Отклонено</a></td>
-                     </tr>
-                     <tr class="row">
-                        <td class="column">Временная метка</td>
-                        <td class="column">Название</td>
-                        <td class="column">Описание</td>
-                        <td class="column">Категория</td>
-                        <td class="column">Статус</td>
-                        <td class="column"><a href="#" data-modal-open="app-approve" data-app-id="3" class="link">Решено</a></td>
-                        <td class="column"><a href="#" data-modal-open="app-cancel" data-app-id="4" class="link">Отклонено</a></td>
-                     </tr>
-                     <tr class="row">
-                        <td class="column">Временная метка</td>
-                        <td class="column">Название</td>
-                        <td class="column">Описание</td>
-                        <td class="column">Категория</td>
-                        <td class="column">Статус</td>
-                        <td class="column"><a href="#" data-modal-open="app-approve" data-app-id="3" class="link">Решено</a></td>
-                        <td class="column"><a href="#" data-modal-open="app-cancel" data-app-id="4" class="link">Отклонено</a></td>
-                     </tr>
+                     <?php foreach($apps as $app): ?>
+								<?php
+                           $notNew = $appModel->getField('status', $app['id']) != 'Новая';
+                           $isApproved = $appModel->getField('status', $app['id']) == 'Решена';
+                           $isCancel = $appModel->getField('status', $app['id']) == 'Отклонена';
+
+                           $color = '';
+
+                           if ($isApproved) {
+                              $color = 'text-accent';
+                           } elseif ($isCancel) {
+                              $color = 'text-danger';
+                           }
+                        ?>
+                        <tr>
+                           <td><?= $app['name'] ?></td>
+                           <td>
+                              <p class="<?= $color ?>"><?= $app['status'] ?></p>
+                              <p><?= $isCancel ? 'Причина: ' . $app['reason'] : '' ?></p>
+                           </td>
+                           <td><?= $appModel->getCat($app['cat_id']); ?></td>
+                           <td><?= $app['created'] ?></td>
+                           <td><?= $app['text'] ?></td>
+                           <td><a href="#" data-modal-open="app-approve" data-app-id="<?= $app['id'] ?>" class="link <?= $notNew ? 'link_disabled' : '' ?>">Одобрить</a></td>
+                           <td><a href="#" data-modal-open="app-cancel" data-app-id="<?= $app['id'] ?>" class="link <?= $notNew ? 'link_disabled' : '' ?>">Отклонить</a></td>
+                        </tr>
+							<?php endforeach; ?>
                   </table>
+                  <?php else: ?>
+						   <p>Заявок от пользователей пока нет.</p>
+					   <?php endif; ?>
                </div>
             </div>
          </div>

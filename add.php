@@ -1,3 +1,34 @@
+<?php
+	require $_SERVER['DOCUMENT_ROOT'] . '/models/UserModel.php';
+	require $_SERVER['DOCUMENT_ROOT'] . '/models/AppModel.php';
+
+	$userModel = new UserModel();
+
+	if (!$userModel->isLogged()) return $userModel->redirect('index.php');
+	if ($userModel->isAdmin()) return $userModel->redirect('admin.php');
+
+	$appModel = new AppModel();
+
+	$appCats = $appModel->getCats();
+
+	$isError = false;
+
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		if (isset($_FILES['photo'])) {
+			$userId = $userModel->get('id');
+			$catId = $_POST['cat-id'];
+			$name = $_POST['name'];
+			$text = $_POST['text'];
+			$photo = file_get_contents($_FILES['photo']['tmp_name']);
+			$created = date('d.m.Y H:i');
+
+			$appModel->addApp($userId, $catId, $name, $text, $photo, $created);
+			return $appModel->redirect('profile.php');
+		}
+
+		$isError = true;
+	}
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -15,7 +46,7 @@
                <img src="assets/images/logo/logo.svg" alt="LOGO">
             </a>
             <div class="inline">
-               <a href="user.php" class="btn">Личный кабинет</a>
+               <a href="profile.php" class="btn"><?= $userModel->get('name') ?></a>
             </div>
          </div>
       </div>
@@ -28,18 +59,17 @@
             </div>
             <div class="section__content">
                <!-- Форма создания заявки -->
-               <form action="" method="post" class="form">
+               <form method="post" enctype="multipart/form-data" class="form">
                   <h2 class="login__name">Создание</h2>
-                  <input type="text" name="login" placeholder="Введите название" class="input" required>
-                  <select class="input text_muted" name="category" required>
-                     <option selected disabled >Категории на выбор</option>
-                     <option value="Новая">Дорога</option>
-                     <option value="Решена">Дом</option>
-                     <option value="Отклонена">Ремонт</option>
+                  <input type="text" name="name" placeholder="Введите название" class="input" required>
+                  <select class="input text_muted" name="cat-id" required>
+                     <?php foreach($appCats as $cat): ?>
+								<option value="<?= $cat['id'] ?>"><?= $cat['name'] ?></option>
+							<?php endforeach; ?>
                   </select>
-                  <textarea name="description" id="description" class="input text_muted" placeholder="Описание" required></textarea>
-                  <input type="file" name="file" placeholder="Добавить фото" class="text_muted" required>
-                  <input type="submit" name="submit" value="Создать" class="btn">
+                  <textarea name="text" id="description" class="input text_muted" placeholder="Описание" required></textarea>
+                  <input required class="input" type="file" name="photo" accept="image/jpg, image/jpeg, image/png, image/bmp" placeholder="Фотография заявки">
+                  <button name="submit" class="btn">Создать</button>
                </form>
             </div>
          </div>
