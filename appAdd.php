@@ -61,7 +61,7 @@
                <!-- Форма создания заявки -->
                <form method="post" enctype="multipart/form-data" class="form">
                   <h2 class="login__name">Создание</h2>
-                  <input type="text" name="name" placeholder="Введите название" class="input" required>
+                  <input type="text text_muted" name="name" placeholder="Введите название" class="input" required>
                   <select class="input text_muted" name="cat-id" required>
                      <?php foreach($appCats as $cat): ?>
 								<option value="<?= $cat['id'] ?>"><?= $cat['name'] ?></option>

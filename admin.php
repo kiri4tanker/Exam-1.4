@@ -31,8 +31,8 @@
                <img src="assets/images/logo/logo.svg" alt="LOGO">
             </a>
             <div class="inline">
-               <a href="category.php" class="btn">Управление категориями</a>
-					<a href="api/logout.php" class="btn">Выйти</a>
+               <a href="appCategory.php" class="btn">Управление категориями</a>
+					<a href="actions/logout.php" class="btn">Выйти</a>
             </div>
          </div>
       </div>
@@ -63,11 +63,11 @@
                   <table class="table">
                      <!-- Название колонок -->
                      <tr class="row row_title">
-                        <td class="column">Временная метка</td>
                         <td class="column">Название</td>
-                        <td class="column">Описание</td>
-                        <td class="column">Категория</td>
                         <td class="column">Статус</td>
+                        <td class="column">Категория</td>
+                        <td class="column">Временная метка</td>
+                        <td class="column">Описание</td>
                         <td class="column" colspan="2">Изменение</td>
                      </tr>
                      <!-- Колонки -->
@@ -85,17 +85,17 @@
                               $color = 'text-danger';
                            }
                         ?>
-                        <tr>
-                           <td><?= $app['name'] ?></td>
-                           <td>
+                        <tr class="row">
+                           <td class="column"><?= $app['name'] ?></td>
+                           <td class="column">
                               <p class="<?= $color ?>"><?= $app['status'] ?></p>
                               <p><?= $isCancel ? 'Причина: ' . $app['reason'] : '' ?></p>
-                           </td>
-                           <td><?= $appModel->getCat($app['cat_id']); ?></td>
-                           <td><?= $app['created'] ?></td>
-                           <td><?= $app['text'] ?></td>
-                           <td><a href="#" data-modal-open="app-approve" data-app-id="<?= $app['id'] ?>" class="link <?= $notNew ? 'link_disabled' : '' ?>">Одобрить</a></td>
-                           <td><a href="#" data-modal-open="app-cancel" data-app-id="<?= $app['id'] ?>" class="link <?= $notNew ? 'link_disabled' : '' ?>">Отклонить</a></td>
+                           </td class="column">
+                           <td class="column"><?= $appModel->getCat($app['cat_id']); ?></td>
+                           <td class="column"><?= $app['created'] ?></td>
+                           <td class="column"><?= $app['text'] ?></td>
+                           <td class="column"><a href="#" data-modal-open="app-approve" data-app-id="<?= $app['id'] ?>" class="link <?= $notNew ? 'link_disabled' : '' ?>">Одобрить</a></td>
+                           <td class="column"><a href="#" data-modal-open="app-cancel" data-app-id="<?= $app['id'] ?>" class="link <?= $notNew ? 'link_disabled' : '' ?>">Отклонить</a></td>
                         </tr>
 							<?php endforeach; ?>
                   </table>
@@ -126,7 +126,7 @@
 				<button class="btn-close" data-modal-close>&times;</button>
 			</div>
 			<div class="modal__content">
-				<form style="width: 100%;">
+				<form style="width: 100%;" action="actions/appCancel.php" method="post">
 					<input type="hidden" name="app-cancel-id" id="app-cancel-id">
 					<div class="inline__between">
 						<textarea required class="input" name="refuse" placeholder="Причина отказа"></textarea>
@@ -148,7 +148,7 @@
 				<button class="btn-close" data-modal-close>&times;</button>
 			</div>
 			<div class="modal__content">
-				<form style="width: 100%;" enctype="multipart/form-data">
+				<form style="width: 100%;" enctype="multipart/form-data" action="actions/appApprove.php" method="post">
 					<input type="hidden" name="app-approve-id" id="app-approve-id">
 					<div class="inline__between">
 					   <input required class="input" type="file" name="photo" accept="image/jpg, image/jpeg, image/png, image/bmp" placeholder="Фотография заявки">

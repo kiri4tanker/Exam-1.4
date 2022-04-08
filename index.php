@@ -4,6 +4,7 @@
 
 	$userModel = new UserModel();
 	$appModel = new AppModel();
+   // $userModel->fillDb();
 
 	$solvedApps = $appModel->getApproved();
 	$solvedAppsNotEmpty = !empty($solvedApps);
@@ -33,8 +34,9 @@
 							<a href="profile.php" class="btn"><?= $userModel->get('name'); ?></a>
 						<?php endif; ?>
 					<?php else: ?>
-               <a href="login.php" class="btn">Войти</a>
-               <a href="register.php" class="btn">Создать аккаунт</a>
+                  <a href="login.php" class="btn">Войти</a>
+                  <a href="register.php" class="btn">Создать аккаунт</a>
+               <?php endif; ?>
             </div>
          </div>
       </div>
@@ -59,7 +61,6 @@
 									$photo = 'data:image/png;base64,' . base64_encode($app['photo']);
 									$photoAfter = 'data:image/png;base64,' . base64_encode($app['photo_after']);
 								?>
-                     <!-- Заявка -->
                      <div class="application">
                         <div class="application__photos">
                            <img src="<?= $photo ?>" alt="<?= $app['name'] . ' до' ?>" class="application__img application__img_after">

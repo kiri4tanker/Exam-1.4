@@ -35,8 +35,8 @@
                <img src="assets/images/logo/logo.svg" alt="LOGO">
             </a>
             <div class="inline">
-               <a href="add.php" class="btn">Создать заявку</a>
-               <a href="api/logout.php" class="btn">Выйти</a>
+               <a href="appAdd.php" class="btn">Создать заявку</a>
+               <a href="actions/logout.php" class="btn">Выйти</a>
             </div>
          </div>
       </div>
@@ -68,6 +68,7 @@
                         </form>
 					      </div>
                      <!-- Таблица с заявками -->
+                     <?php if ($appsNotNull): ?>
                      <table class="table">
                         <!-- Названия колонок -->
                         <tr class="row row_title">
@@ -80,37 +81,37 @@
                         </tr>
                         <!-- Колонка -->
                         <?php foreach($apps as $app): ?>
-										<?php
-                                 // Статусы 
-											$notNew = $appModel->getField('status', $app['id']) != 'Новая';
-											$isApproved = $appModel->getField('status', $app['id']) == 'Решена';
-											$isCancel = $appModel->getField('status', $app['id']) == 'Отклонена';
+                           <?php
+                              // Статусы 
+                              $notNew = $appModel->getField('status', $app['id']) != 'Новая';
+                              $isApproved = $appModel->getField('status', $app['id']) == 'Решена';
+                              $isCancel = $appModel->getField('status', $app['id']) == 'Отклонена';
 
-                                 $color = '';
+                              $color = '';
 
-											if ($isApproved) {
-												$color = 'text-accent';
-											} elseif ($isCancel) {
-												$color = 'text-danger';
-											}
-										?>
-                              <tr>
-											<td><?= $app['name'] ?></td>
-											<td>
-												<p class="<?= $color ?>"><?= $app['status'] ?></p>
-												<p><?= $isCancel ? 'Причина: ' . $app['reason'] : '' ?></p>
-											</td>
-											<td><?= $appModel->getCat($app['cat_id']) ?></td>
-											<td><?= $app['created'] ?></td>
-											<td><?= $app['text'] ?></td>
-											<td><a href="#" data-modal-open="app-delete" data-app-id="<?= $app['id'] ?>" class="link link_danger <?= $notNew ? 'link_disabled' : '' ?>">Удалить</a></td>
-										</tr>
-									<?php endforeach; ?>
+                              if ($isApproved) {
+                                 $color = 'text-accent';
+                              } elseif ($isCancel) {
+                                 $color = 'text-danger';
+                              }
+                           ?>
+                           <tr class="row">
+                              <td class="column"><?= $app['name'] ?></td>
+                              <td class="column">
+                                 <p class="<?= $color ?>"><?= $app['status'] ?></p>
+                                 <p><?= $isCancel ? 'Причина: ' . $app['reason'] : '' ?></p>
+                              </td class="column">
+                              <td class="column"><?= $appModel->getCat($app['cat_id']) ?></td>
+                              <td class="column"><?= $app['created'] ?></td>
+                              <td class="column"><?= $app['text'] ?></td>
+                              <td class="column"><a href="#" data-modal-open="app-delete" data-app-id="<?= $app['id'] ?>" class="link link_danger <?= $notNew ? 'link_disabled' : '' ?>">Удалить</a></td>
+                           </tr>
+							   <?php endforeach; ?>
                      </table>
-                  </div>
                   <?php else: ?>
 						   <p>Заявок не найдено.</p>
 					   <?php endif; ?>
+                  </div>
                </div>
             </div>
          </div>

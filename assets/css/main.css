@@ -233,6 +233,11 @@ textarea.input {
 .link:hover {
 	color: var(--accent-color-hover);
 }
+.link_disabled {
+	color: var(--text-muted-color);
+	pointer-events: none;
+	cursor: not-allowed;
+}
 /* checkbox */
 .checkbox {
    display: flex;
