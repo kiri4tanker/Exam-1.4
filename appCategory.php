@@ -91,7 +91,7 @@
 			</div>
 			<div class="modal__content">
 				<p>Все заявки с данной категорией будут удалены!</p>
-				<form style="width: 100%;">
+				<form style="width: 100%;" method="post" action="actions/appCategoryDelete.php">
 					<input type="hidden" name="app-category-delete-id" id="app-category-delete-id">
 					<div class="inline">
 						<button class="btn">Удалить</button>

@@ -46,7 +46,7 @@
       <section class="section">
          <div class="container">
             <div class="section__heading">
-               <h1 class="section__title">Добро пожаловать, <?= $userModel->get('name'); ?>. Вот ваши заявки:</h1>
+               <h1 class="section__title">Добро пожаловать, <?= $userModel->get('name'); ?></h1>
             </div>
             <div class="section__content">
                <div class="profile">
@@ -72,11 +72,11 @@
                      <table class="table">
                         <!-- Названия колонок -->
                         <tr class="row row_title">
-                           <td class="column">Временная метка</td>
                            <td class="column">Название</td>
-                           <td class="column">Описание</td>
-                           <td class="column">Категория</td>
                            <td class="column">Статус</td>
+                           <td class="column">Категория</td>
+                           <td class="column">Временная метка</td>
+                           <td class="column">Описание</td>
                            <td class="column">Изменение</td>
                         </tr>
                         <!-- Колонка -->
@@ -137,7 +137,7 @@
 			</div>
 			<div class="modal__content">
 				<p>Данное действие нельзя будет отменить.</p>
-				<form style="width: 100%;">
+				<form style="width: 100%;" method="post" action="actions/appDelete.php">
 					<input type="hidden" name="app-delete-id" id="app-delete-id">
 					<div class="inline">
 						<button class="btn">Удалить</button>

@@ -129,7 +129,7 @@
 				<form style="width: 100%;" action="actions/appCancel.php" method="post">
 					<input type="hidden" name="app-cancel-id" id="app-cancel-id">
 					<div class="inline__between">
-						<textarea required class="input" name="refuse" placeholder="Причина отказа"></textarea>
+						<textarea required class="input" name="reason" placeholder="Причина отказа"></textarea>
 					</div>
 					<div class="inline">
 						<button class="btn">Отклонить</button>
@@ -151,7 +151,7 @@
 				<form style="width: 100%;" enctype="multipart/form-data" action="actions/appApprove.php" method="post">
 					<input type="hidden" name="app-approve-id" id="app-approve-id">
 					<div class="inline__between">
-					   <input required class="input" type="file" name="photo" accept="image/jpg, image/jpeg, image/png, image/bmp" placeholder="Фотография заявки">
+					   <input required class="input" type="file" name="photoAfter" accept="image/jpg, image/jpeg, image/png, image/bmp" placeholder="Фотография заявки">
 					</div>
 					<div class="inline">
 						<button class="btn">Решена</button>

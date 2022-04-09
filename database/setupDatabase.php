@@ -2,8 +2,8 @@
 	function setupDatabase($db) {
 		// Создание БД
 	
-		$db->query('create database if not exists wordskills_city');
-		$db->query('use wordskills_city');
+		$db->query('create database if not exists city');
+		$db->query('use city');
 
 		// Таблица users
 

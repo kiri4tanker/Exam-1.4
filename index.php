@@ -4,8 +4,7 @@
 
 	$userModel = new UserModel();
 	$appModel = new AppModel();
-   // $userModel->fillDb();
-
+   
 	$solvedApps = $appModel->getApproved();
 	$solvedAppsNotEmpty = !empty($solvedApps);
 ?>
@@ -66,17 +65,17 @@
                            <img src="<?= $photo ?>" alt="<?= $app['name'] . ' до' ?>" class="application__img application__img_after">
                            <img src="<?= $photoAfter ?>" alt="<?= $app['name'] . ' после' ?>" class="application__img application__img_before">
                         </div>
-                        <p class="application__name"><?= $app['name'] ?>"><?= $app['name'] ?></p>
+                        <p class="application__name"><?= $app['name'] ?></p>
                         <div class="inline">
                            <p class="application__date"><?= $app['created'] ?></p>
-                           <p class="application__category text-limit" title="<?= $appModel->getCat($app['cat_id']) ?>">Категория: <?= $appModel->getCat($app['cat_id']) ?></p>
+                           <p class="application__category text-limit text_muted" title="<?= $appModel->getCat($app['cat_id']) ?>">Категория: <?= $appModel->getCat($app['cat_id']) ?></p>
                         </div>
                      </div>
-                  </div>
                   <?php endforeach; ?>
+                  </div>
 					</div>
 					<?php else: ?>
-						<p>Пока что решенных заявок нет. Но мы их будем решать, когда они начнут появляться, ага?</p>
+						<p class="text_center">Пока что решенных заявок нет!</p>
 					<?php endif; ?>
             </div>
          </div>

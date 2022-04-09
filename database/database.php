@@ -1,5 +1,6 @@
 <?php
 	require_once 'setupDatabase.php';
+	require_once 'fillDatabase.php';
 
 	try {
 		$db = new PDO('mysql:host=localhost', 'root', '', [
@@ -7,6 +8,7 @@
 		]);
 
 		setupDatabase($db);
+		fillDatabase($db);
 	} catch(PDOException $e) {
 		echo $e;
 	}

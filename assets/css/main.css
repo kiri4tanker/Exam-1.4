@@ -103,6 +103,9 @@ body {
 .text_muted {
 	color: var(--text-muted-color);
 }
+.text_center {
+	text-align: center;
+}
 /* modal */
 .modal:not(.active) {
 	pointer-events: none;
@@ -288,7 +291,7 @@ textarea.input {
 	grid-template-columns: repeat(2, 1fr);
 	gap: var(--gutter);
 }
-.counter {
+.app-counter {
 	text-align: center;
 	margin: 30px;
 }
