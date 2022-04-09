@@ -69,45 +69,47 @@
 					      </div>
                      <!-- Таблица с заявками -->
                      <?php if ($appsNotNull): ?>
-                     <table class="table">
-                        <!-- Названия колонок -->
-                        <tr class="row row_title">
-                           <td class="column">Название</td>
-                           <td class="column">Статус</td>
-                           <td class="column">Категория</td>
-                           <td class="column">Временная метка</td>
-                           <td class="column">Описание</td>
-                           <td class="column">Изменение</td>
-                        </tr>
-                        <!-- Колонка -->
-                        <?php foreach($apps as $app): ?>
-                           <?php
-                              // Статусы 
-                              $notNew = $appModel->getField('status', $app['id']) != 'Новая';
-                              $isApproved = $appModel->getField('status', $app['id']) == 'Решена';
-                              $isCancel = $appModel->getField('status', $app['id']) == 'Отклонена';
-
-                              $color = '';
-
-                              if ($isApproved) {
-                                 $color = 'text-accent';
-                              } elseif ($isCancel) {
-                                 $color = 'text-danger';
-                              }
-                           ?>
-                           <tr class="row">
-                              <td class="column"><?= $app['name'] ?></td>
-                              <td class="column">
-                                 <p class="<?= $color ?>"><?= $app['status'] ?></p>
-                                 <p><?= $isCancel ? 'Причина: ' . $app['reason'] : '' ?></p>
-                              </td class="column">
-                              <td class="column"><?= $appModel->getCat($app['cat_id']) ?></td>
-                              <td class="column"><?= $app['created'] ?></td>
-                              <td class="column"><?= $app['text'] ?></td>
-                              <td class="column"><a href="#" data-modal-open="app-delete" data-app-id="<?= $app['id'] ?>" class="link link_danger <?= $notNew ? 'link_disabled' : '' ?>">Удалить</a></td>
+                     <div class="table-media">
+                        <table class="table">
+                           <!-- Названия колонок -->
+                           <tr class="row row_title">
+                              <td class="column">Название</td>
+                              <td class="column">Статус</td>
+                              <td class="column">Категория</td>
+                              <td class="column">Временная метка</td>
+                              <td class="column">Описание</td>
+                              <td class="column">Изменение</td>
                            </tr>
-							   <?php endforeach; ?>
-                     </table>
+                           <!-- Колонка -->
+                           <?php foreach($apps as $app): ?>
+                              <?php
+                                 // Статусы 
+                                 $notNew = $appModel->getField('status', $app['id']) != 'Новая';
+                                 $isApproved = $appModel->getField('status', $app['id']) == 'Решена';
+                                 $isCancel = $appModel->getField('status', $app['id']) == 'Отклонена';
+
+                                 $color = '';
+
+                                 if ($isApproved) {
+                                    $color = 'text-accent';
+                                 } elseif ($isCancel) {
+                                    $color = 'text-danger';
+                                 }
+                              ?>
+                              <tr class="row">
+                                 <td class="column"><?= $app['name'] ?></td>
+                                 <td class="column">
+                                    <p class="<?= $color ?>"><?= $app['status'] ?></p>
+                                    <p><?= $isCancel ? 'Причина: ' . $app['reason'] : '' ?></p>
+                                 </td class="column">
+                                 <td class="column"><?= $appModel->getCat($app['cat_id']) ?></td>
+                                 <td class="column"><?= $app['created'] ?></td>
+                                 <td class="column"><?= $app['text'] ?></td>
+                                 <td class="column"><a href="#" data-modal-open="app-delete" data-app-id="<?= $app['id'] ?>" class="link link_danger <?= $notNew ? 'link_disabled' : '' ?>">Удалить</a></td>
+                              </tr>
+                           <?php endforeach; ?>
+                        </table>
+                     </div>
                   <?php else: ?>
 						   <p>Заявок не найдено.</p>
 					   <?php endif; ?>

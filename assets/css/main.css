@@ -380,6 +380,9 @@ textarea.input {
 	border: 1px solid var(--border-color);
 	padding: 10px;
 }
+.table-media {
+	overflow-x: auto;
+}
 /* profile */
 .profile__heading {
 	margin-bottom: 20px;

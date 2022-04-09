@@ -42,7 +42,7 @@
       <section class="section">
          <div class="container">
             <div class="section__heading">
-               <h1 class="section__title">Добро пожаловать, <?= $userModel->get('name') ?>. Вот список всех заявок на сайте:</h1>
+               <h1 class="section__title">Добро пожаловать, <?= $userModel->get('name') ?></h1>
             </div>
             <div class="section__content">
             <?php if($isError): ?>
@@ -60,45 +60,47 @@
                </div>
                <div class="profile__content">
                   <!-- Таблица заявок -->
-                  <table class="table">
-                     <!-- Название колонок -->
-                     <tr class="row row_title">
-                        <td class="column">Название</td>
-                        <td class="column">Статус</td>
-                        <td class="column">Категория</td>
-                        <td class="column">Временная метка</td>
-                        <td class="column">Описание</td>
-                        <td class="column" colspan="2">Изменение</td>
-                     </tr>
-                     <!-- Колонки -->
-                     <?php foreach($apps as $app): ?>
-								<?php
-                           $notNew = $appModel->getField('status', $app['id']) != 'Новая';
-                           $isApproved = $appModel->getField('status', $app['id']) == 'Решена';
-                           $isCancel = $appModel->getField('status', $app['id']) == 'Отклонена';
-
-                           $color = '';
-
-                           if ($isApproved) {
-                              $color = 'text-accent';
-                           } elseif ($isCancel) {
-                              $color = 'text-danger';
-                           }
-                        ?>
-                        <tr class="row">
-                           <td class="column"><?= $app['name'] ?></td>
-                           <td class="column">
-                              <p class="<?= $color ?>"><?= $app['status'] ?></p>
-                              <p><?= $isCancel ? 'Причина: ' . $app['reason'] : '' ?></p>
-                           </td class="column">
-                           <td class="column"><?= $appModel->getCat($app['cat_id']); ?></td>
-                           <td class="column"><?= $app['created'] ?></td>
-                           <td class="column"><?= $app['text'] ?></td>
-                           <td class="column"><a href="#" data-modal-open="app-approve" data-app-id="<?= $app['id'] ?>" class="link <?= $notNew ? 'link_disabled' : '' ?>">Одобрить</a></td>
-                           <td class="column"><a href="#" data-modal-open="app-cancel" data-app-id="<?= $app['id'] ?>" class="link <?= $notNew ? 'link_disabled' : '' ?>">Отклонить</a></td>
+                  <div class="table-media">
+                     <table class="table">
+                        <!-- Название колонок -->
+                        <tr class="row row_title">
+                           <td class="column">Название</td>
+                           <td class="column">Статус</td>
+                           <td class="column">Категория</td>
+                           <td class="column">Временная метка</td>
+                           <td class="column">Описание</td>
+                           <td class="column" colspan="2">Изменение</td>
                         </tr>
-							<?php endforeach; ?>
-                  </table>
+                        <!-- Колонки -->
+                        <?php foreach($apps as $app): ?>
+                           <?php
+                              $notNew = $appModel->getField('status', $app['id']) != 'Новая';
+                              $isApproved = $appModel->getField('status', $app['id']) == 'Решена';
+                              $isCancel = $appModel->getField('status', $app['id']) == 'Отклонена';
+
+                              $color = '';
+
+                              if ($isApproved) {
+                                 $color = 'text-accent';
+                              } elseif ($isCancel) {
+                                 $color = 'text-danger';
+                              }
+                           ?>
+                           <tr class="row">
+                              <td class="column"><?= $app['name'] ?></td>
+                              <td class="column">
+                                 <p class="<?= $color ?>"><?= $app['status'] ?></p>
+                                 <p><?= $isCancel ? 'Причина: ' . $app['reason'] : '' ?></p>
+                              </td class="column">
+                              <td class="column"><?= $appModel->getCat($app['cat_id']); ?></td>
+                              <td class="column"><?= $app['created'] ?></td>
+                              <td class="column"><?= $app['text'] ?></td>
+                              <td class="column"><a href="#" data-modal-open="app-approve" data-app-id="<?= $app['id'] ?>" class="link <?= $notNew ? 'link_disabled' : '' ?>">Одобрить</a></td>
+                              <td class="column"><a href="#" data-modal-open="app-cancel" data-app-id="<?= $app['id'] ?>" class="link <?= $notNew ? 'link_disabled' : '' ?>">Отклонить</a></td>
+                           </tr>
+                        <?php endforeach; ?>
+                     </table>
+                  </div>
                   <?php else: ?>
 						   <p>Заявок от пользователей пока нет.</p>
 					   <?php endif; ?>
